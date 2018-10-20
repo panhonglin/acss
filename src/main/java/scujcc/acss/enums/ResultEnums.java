@@ -20,10 +20,12 @@ public enum  ResultEnums {
     SYSTEM_UPLOAD_FILE_TO_LARGE(2,"上传文件过大"),
     SYSTEM_UPLOAD_FILE_TIMEOUT(3,"上传文件超时"),
     SYSTEM_UPLOAD_FILE_TYPE_ILLEGAL(4,"上传文件类型非法"),
+    SYSTEM_IO_ERROR(5,"IO异常"),
     //文件
     FILE_READ_FAILED(100,"文件读取失败"),
     FILE_WRITE_FAILED(101,"文件写入失败"),
     FILE_EMPTY(102,"文件为空"),
+    FILE_NOT_FOUND(103,"文件没有找到"),
     //Excel
     EXCEL_UNKNOW_KEY_NAME(201,"未知键名"),
     EXCEL_NULL_VALUE(202,"空值"),

@@ -3,9 +3,15 @@ package scujcc.acss.utils;/**
  * @create 2018-10-20 下午 03:50
  */
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import scujcc.acss.enums.ResultEnums;
 import scujcc.acss.exception.FileException;
+import scujcc.acss.exception.SystemException;
+
+import java.io.*;
+import java.util.List;
 
 /**
  *@ClassNmae FileUploadUtil
@@ -15,11 +21,26 @@ import scujcc.acss.exception.FileException;
  *@Version 1.0
  **/
 public class FileUploadUtil {
-    public void getFile(MultipartFile file) throws Exception{
-        if (!file.isEmpty()) {
-
-        } else {
-            throw new FileException(ResultEnums.FILE_EMPTY);
+    public void getFile(HttpServletRequest request) throws Exception{
+        List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
+        MultipartFile file = null;
+        BufferedOutputStream stream = null;
+        for (int i =0;i<files.size();++i) {
+            file = files.get(i);
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+                    stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+                    stream.write(bytes);
+                    stream.close();
+                } catch (FileNotFoundException e) {
+                    throw new FileException(ResultEnums.FILE_NOT_FOUND);
+                } catch (IOException e) {
+                    throw new SystemException(ResultEnums.SYSTEM_IO_ERROR);
+                }
+            } else {
+                throw new FileException(ResultEnums.FILE_EMPTY);
+            }
         }
     }
 }
