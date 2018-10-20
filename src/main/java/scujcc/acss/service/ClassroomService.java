@@ -17,12 +17,24 @@ public class ClassroomService {
     @Autowired
     private ClassroomRepository classroomRepository;
     //TODO
-    //插入单个教室到数据库
     @Transactional
+    /**
+     * @Author CZM
+     * @Description 插入单个教室到数据库
+     * @Date 下午 01:17 2018/10/20
+     * @Param [classroom]
+     * @return void
+     **/
     public void insertSingle(Classroom classroom){
         classroomRepository.save(classroom);
     }
-    //通过某个关键字删除单个对象
+    /**
+     * @Author CZM
+     * @Description 通过某个关键字删除单个对象
+     * @Date 下午 01:18 2018/10/20
+     * @Param [id]
+     * @return void
+     **/
     @Transactional
     public void deleteSingleById(Integer id){
         classroomRepository.delete(classroomRepository.findByClassroomId(id));
@@ -35,7 +47,13 @@ public class ClassroomService {
     public void deleteSingleByClassroomName(String classroomName){
         classroomRepository.delete(classroomRepository.findByClassroomName(classroomName));
     }
-    //通过某个关键字数组删除多个对象
+    /**
+     * @Author CZM
+     * @Description 通过某个关键字数组删除多个对象
+     * @Date 下午 01:18 2018/10/20
+     * @Param [id]
+     * @return void
+     **/
     @Transactional
     public void deleteMultipleById(Integer[] id){
         for (int i =0;i<id.length;i++) {

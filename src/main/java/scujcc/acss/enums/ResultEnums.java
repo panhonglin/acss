@@ -39,6 +39,13 @@ public enum  ResultEnums {
     //错误消息
     private String msg;
 
+    /**
+     * @Author CZM
+     * @Description 构造函数，负责初始化错误代码和错误信息
+     * @Date 下午 01:16 2018/10/20
+     * @Param [code, msg]
+     * @return 
+     **/
     ResultEnums(Integer code,String msg){
         this.code = code;
         this.msg = msg;

@@ -10,7 +10,13 @@ import scujcc.acss.enums.ResultEnums;
  */
 public class ResultUtil {
     //TODO
-    //输出正确和相关数据
+    /**
+     * @Author CZM
+     * @Description 输出正确和相关数据
+     * @Date 下午 01:16 2018/10/20
+     * @Param [object]
+     * @return scujcc.acss.domain.Result
+     **/
     public static Result success(Object object){
         Result result = new Result();
         result.setCode(ResultEnums.SYSTEM_SUCCESS.getCode());
@@ -18,10 +24,23 @@ public class ResultUtil {
         result.setData(object);
         return result;
     }
+    /**
+     * @Author CZM
+     * @Description 输出正确和相关数据
+     * @Date 下午 01:17 2018/10/20
+     * @Param []
+     * @return scujcc.acss.domain.Result
+     **/
     public static Result success(){
         return success(null);
     }
-    //输出错误和相关信息
+    /**
+     * @Author CZM
+     * @Description 输出错误和相关信息
+     * @Date 下午 01:16 2018/10/20
+     * @Param [code, msg]
+     * @return scujcc.acss.domain.Result
+     **/
     public static Result error(Integer code,String msg){
         Result result = new Result();
         result.setCode(code);

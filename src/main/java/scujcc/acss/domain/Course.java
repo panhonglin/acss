@@ -152,6 +152,13 @@ public class Course {
         return weekNumber;
     }
 
+    /**
+     * @Author CZM
+     * @Description 转换为字符串
+     * @Date 下午 01:14 2018/10/20
+     * @Param []
+     * @return java.lang.String
+     **/
     @Override
     public String toString() {
         return super.toString();

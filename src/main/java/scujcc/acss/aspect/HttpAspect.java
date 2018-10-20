@@ -19,15 +19,28 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class HttpAspect {
-
+    //日志
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
+
+    /**
+     * @Author CZM
+     * @Description //TODO 
+     * @Date 下午 01:02 2018/10/20
+     * @Param []
+     * @return void
+     **/
     @Pointcut(("execution(public * scujcc.acss.controller.MainController.*(..))"))
     public void log(){ }
 
-    //TODO
 
-    //记录请求信息
+    /**
+     * @Author CZM
+     * @Description 记录请求的情况
+     * @Date 下午 01:02 2018/10/20
+     * @Param [joinPoint]
+     * @return void
+     **/
     @Before("log()")
     public void logBefore(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -45,7 +58,13 @@ public class HttpAspect {
 
     }
 
-    //记录返回的值
+    /**
+     * @Author CZM
+     * @Description 记录返回的值
+     * @Date 下午 01:06 2018/10/20
+     * @Param [object]
+     * @return void
+     **/
     @AfterReturning(returning = "object",pointcut = "log()")
     public void logReturn(Object object){
         logger.info("response={}",object.toString());

@@ -24,6 +24,13 @@ public class ExceptionHandle {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
+    /**
+     * @Author CZM
+     * @Description 统一异常处理
+     * @Date 下午 01:07 2018/10/20
+     * @Param [e]
+     * @return scujcc.acss.domain.Result
+     **/
     public Result handle(Exception e){
         //TODO
         if (e instanceof ClassroomException) {
