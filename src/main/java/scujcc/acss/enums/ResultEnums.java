@@ -23,6 +23,7 @@ public enum  ResultEnums {
     //文件
     FILE_READ_FAILED(100,"文件读取失败"),
     FILE_WRITE_FAILED(101,"文件写入失败"),
+    FILE_EMPTY(102,"文件为空"),
     //Excel
     EXCEL_UNKNOW_KEY_NAME(201,"未知键名"),
     EXCEL_NULL_VALUE(202,"空值"),

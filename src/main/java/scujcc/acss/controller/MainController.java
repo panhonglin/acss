@@ -1,5 +1,7 @@
 package scujcc.acss.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,5 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class MainController {
+    //TODO
+    @PostMapping(value = "/acss/upload")
+    public void upload(){
+
+    }
     //TODO
 }

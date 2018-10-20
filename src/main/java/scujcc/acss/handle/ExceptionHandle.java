@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import scujcc.acss.domain.Result;
 import scujcc.acss.enums.ResultEnums;
-import scujcc.acss.exception.ClassroomException;
-import scujcc.acss.exception.CourseException;
-import scujcc.acss.exception.TeacherException;
+import scujcc.acss.exception.*;
 import scujcc.acss.utils.ResultUtil;
 
 /**
@@ -41,7 +39,19 @@ public class ExceptionHandle {
             return ResultUtil.error(courseException.getCode(), courseException.getMsg());
         } else if (e instanceof TeacherException) {
             TeacherException teacherException = (TeacherException) e;
-            return ResultUtil.error(teacherException.getCode(),teacherException.getMsg());
+            return ResultUtil.error(teacherException.getCode(), teacherException.getMsg());
+        } else if (e instanceof SystemException) {
+            SystemException systemException = (SystemException) e;
+            return ResultUtil.error(systemException.getCode(), systemException.getMsg());
+        } else if (e instanceof FileException) {
+            FileException fileException = (FileException) e;
+            return ResultUtil.error(fileException.getCode(), fileException.getMsg());
+        } else if (e instanceof DatabasesException) {
+            DatabasesException databasesException = (DatabasesException) e;
+            return ResultUtil.error(databasesException.getCode(), databasesException.getMsg());
+        } else if (e instanceof ExcelException) {
+            ExcelException excelException = (ExcelException) e;
+            return ResultUtil.error(excelException.getCode(),excelException.getMsg());
         } else {
             logger.error("【系统异常】{}",e);
             return ResultUtil.error(ResultEnums.UNKNOW_ERROR.getCode(),ResultEnums.UNKNOW_ERROR.getMsg());
