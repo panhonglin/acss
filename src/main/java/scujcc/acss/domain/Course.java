@@ -161,7 +161,35 @@ public class Course {
      **/
     @Override
     public String toString() {
-        return super.toString();
+        String string = "";
+        string += "{";
+        string += "courseId="+courseId;
+        string += ", grade="+grade;
+        string += ", courseCode='"+courseCode+"'";
+        string += ", courseName='"+courseName+"'";
+        string += ", courseType='"+courseType+"'";
+        string += ", credit"+credit;
+        string += ", teacherName='"+teacherName+"'";
+        string += ", studentNumber="+studentNumber;
+        string += ", classTime=[";
+        for (String s:classTime) {
+            string += "'"+s+"', ";
+        }
+        string += "], ";
+        string += ", classLocation=[";
+        for (String s:classLocations) {
+            string += "'"+s+"', ";
+        }
+        string += "], ";
+        string += ", classComposition=[";
+        for (String s:classComposition) {
+            string += "'"+s+"', ";
+        }
+        string += "], totalPeriod=" + totalPeriod;
+        string += ", courseLength=" + courseLength;
+        string += ", weekNumber=" + weekNumber;
+        string += "}";
+        return string;
     }
 
     public void setWeekNumber(Integer weekNumber) {

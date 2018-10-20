@@ -75,6 +75,17 @@ public class Classroom {
      **/
     @Override
     public String toString() {
-        return super.toString();
+        String string = "";
+        string += "Classroom{";
+        string += "classroomId="+classroomId;
+        string += ", classroomNumber="+classroomNumber;
+        string += ", classroomName='"+classroomName+"'";
+        string += ", classroomSeatsNumber="+classroomSeatsNumber;
+        string += ", classroomUseTime=[";
+        for (String s:classroomUseTime){
+            string += "'"+s+"', ";
+        }
+        string += "]}";
+        return string;
     }
 }

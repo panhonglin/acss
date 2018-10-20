@@ -1,9 +1,6 @@
 package scujcc.acss.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 教室实体
@@ -56,6 +53,15 @@ public class Teacher {
      **/
     @Override
     public String toString() {
-        return super.toString();
+        String string = "";
+        string += "{";
+        string += "teacherId="+teacherId;
+        string += ", teacherName="+teacherName;
+        string += ", classComposition=[";
+        for (String s:classComposition) {
+            string += "'"+s+"', ";
+        }
+        string += "]}";
+        return string;
     }
 }
