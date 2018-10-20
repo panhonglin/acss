@@ -72,6 +72,21 @@ public class ExcelUtil {
 
     /**
      * @Author CZM
+     * @Description 将工具的所有成员变量的值全部清除掉
+     * @Date 下午 03:27 2018/10/20
+     * @Param []
+     * @return void
+     **/
+    public void clean(){
+        this.excelMap = null;
+        this.excelList = null;
+        this.fileAddress = "";
+        this.totalCells = 0;
+        this.totalRows = 0;
+    }
+
+    /**
+     * @Author CZM
      * @Description 读取Excel相关数据并放入到序列中
      * @Date 下午 03:12 2018/10/20
      * @Param []
