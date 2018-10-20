@@ -37,6 +37,13 @@ public class ExcelUtil {
     //excel表map映射，可以通过键值来访问相关数据
     private Map<Integer,Map<String,String>> excelMap;
 
+    public List<List<String>> getExcelList() {
+        return excelList;
+    }
+
+    public void setExcelList(List<List<String>> excelList) {
+        this.excelList = excelList;
+    }
 
     /**
      * @Author CZM
