@@ -21,6 +21,13 @@ import java.util.List;
  *@Version 1.0
  **/
 public class FileUploadUtil {
+    /**
+     * @Author CZM
+     * @Description 获取文件
+     * @Date 下午 06:17 2018/10/20
+     * @Param [request]
+     * @return void
+     **/
     public void getFile(HttpServletRequest request) throws Exception{
         List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
         MultipartFile file = null;
