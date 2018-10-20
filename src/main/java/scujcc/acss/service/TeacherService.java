@@ -2,7 +2,10 @@ package scujcc.acss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import scujcc.acss.domain.Teacher;
 import scujcc.acss.repository.TeacherRepository;
+
+import javax.transaction.Transactional;
 
 /**
  * @author CZM
@@ -13,4 +16,8 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
     //TODO
+    @Transactional
+    public void insert(Teacher teacher){
+        teacherRepository.save(teacher);
+    }
 }

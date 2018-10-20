@@ -16,7 +16,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //自增的ID
-    private Integer CourseId;
+    private Integer courseId;
     //年级
     private Integer grade;
     //课程代码
@@ -38,18 +38,18 @@ public class Course {
     //上课班级
     private String[] classComposition;
     //总学时
-    private Double totalPerido;
+    private Double totalPeriod;
     //上课时长
     private Integer courseLength;
     //上课周数
     private Integer weekNumber;
 
     public Integer getCourseId() {
-        return CourseId;
+        return courseId;
     }
 
     public void setCourseId(Integer courseId) {
-        CourseId = courseId;
+        this.courseId = courseId;
     }
 
     public Integer getGrade() {
@@ -132,12 +132,12 @@ public class Course {
         this.classComposition = classComposition;
     }
 
-    public Double getTotalPerido() {
-        return totalPerido;
+    public Double getTotalPeriod() {
+        return totalPeriod;
     }
 
-    public void setTotalPerido(Double totalPerido) {
-        this.totalPerido = totalPerido;
+    public void setTotalPeriod(Double totalPeriod) {
+        this.totalPeriod = totalPeriod;
     }
 
     public Integer getCourseLength() {
