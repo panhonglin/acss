@@ -2,6 +2,7 @@ package scujcc.acss.controller;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import scujcc.acss.utils.FileUploadUtil;
 
@@ -14,7 +15,7 @@ import scujcc.acss.utils.FileUploadUtil;
 public class MainController {
     //TODO
     @PostMapping(value = "/acss/upload")
-    public void upload(HttpServletRequest request) throws Exception {
+    public void upload(@RequestBody HttpServletRequest request) throws Exception {
         (new FileUploadUtil()).getFile(request);
     }
     //TODO

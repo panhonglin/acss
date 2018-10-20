@@ -53,7 +53,7 @@ public class ExceptionHandle {
             ExcelException excelException = (ExcelException) e;
             return ResultUtil.error(excelException.getCode(),excelException.getMsg());
         } else {
-            logger.error("【系统异常】{}",e);
+            logger.error("【系统异常】{}",e.toString());
             return ResultUtil.error(ResultEnums.UNKNOW_ERROR.getCode(),ResultEnums.UNKNOW_ERROR.getMsg());
         }
     }
