@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -40,7 +41,7 @@ public class Course {
     private Integer studentNumber;
     //上课时间
     //private String[] classTime;
-    private Map<String, Map<String,Boolean>> classTime;
+    private HashMap<String, HashMap<String,Boolean>> classTime;
     //上课地点
     private String[] classLocations;
     //上课班级
@@ -116,11 +117,11 @@ public class Course {
         this.studentNumber = studentNumber;
     }
 
-    public Map<String, Map<String, Boolean>> getClassTime() {
+    public HashMap<String, HashMap<String, Boolean>> getClassTime() {
         return classTime;
     }
 
-    public void setClassTime(Map<String, Map<String, Boolean>> classTime) {
+    public void setClassTime(HashMap<String, HashMap<String, Boolean>> classTime) {
         this.classTime = classTime;
     }
 

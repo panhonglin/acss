@@ -1,11 +1,11 @@
 package scujcc.acss.domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,13 +28,29 @@ public class Classroom {
     private Integer classroomSeatsNumber;
     //使用时间
     //private String[] classroomUseTime;
-    private Map<String, Map<String,Boolean>> classroomUseTime;
+    //private Map<String, Map<String,Boolean>> classroomUseTime;
+    //嵌套的map应当是Map<String,Boolean>
+    //private Map<String,Map> classroomUseTime;
+    private HashMap<String,HashMap<String,Boolean>> classroomUseTime;
 
-    public Map<String, Map<String, Boolean>> getClassroomUseTime() {
+    /*
+    Map<String, Map<String,Boolean>> map = new HashMap<String,Map<String,Boolean>>();
+    String[] week = {"周一","周二","周三","周四","周五"};
+    String[] classTime ={"第1,2节","第3,4节","第5,6节","第7,8节"};
+        for (int i =0;i<week.length;i++) {
+        Map<String,Boolean> map1 = new HashMap<>();
+        for (int  j =0;j<classTime.length;j++) {
+            map1.put(classTime[j],true);
+        }
+        map.put(week[i],map1);
+    }
+    */
+
+    public HashMap<String, HashMap<String, Boolean>> getClassroomUseTime() {
         return classroomUseTime;
     }
 
-    public void setClassroomUseTime(Map<String, Map<String, Boolean>> classroomUseTime) {
+    public void setClassroomUseTime(HashMap<String, HashMap<String, Boolean>> classroomUseTime) {
         this.classroomUseTime = classroomUseTime;
     }
 

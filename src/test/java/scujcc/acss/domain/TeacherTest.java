@@ -3,7 +3,6 @@ package scujcc.acss.domain;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -24,11 +23,11 @@ public class TeacherTest {
 
     @Test
     public void getClassroomToString(){
-        Map<String, Map<String,Boolean>> map = new HashMap<String,Map<String,Boolean>>();
+        HashMap<String, HashMap<String,Boolean>> map = new HashMap<String,HashMap<String, Boolean>>();
         String[] week = {"周一","周二","周三","周四","周五"};
         String[] classTime ={"第1,2节","第3,4节","第5,6节","第7,8节"};
         for (int i =0;i<week.length;i++) {
-            Map<String,Boolean> map1 = new HashMap<>();
+            HashMap<String,Boolean> map1 = new HashMap<String,Boolean>();
             for (int  j =0;j<classTime.length;j++) {
                 map1.put(classTime[j],true);
             }

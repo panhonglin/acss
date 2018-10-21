@@ -1,6 +1,10 @@
 package scujcc.acss.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,26 +25,32 @@ public class Teacher {
     private String[] classComposition;
     //教师指定的上课时间
     //private String[] teacherDesignationClassTime;
-    private Map<String, Map<String,Boolean>> teacherDesignationClassTime;
+    //private Map<String, Map<String,Boolean>> teacherDesignationClassTime;
+    //嵌套Map<String,Boolean>
+    //private Map<String,Map> teacherDesignationClassTime;
+    private HashMap<String,HashMap<String,Boolean>> teacherDesignationClassTime;
     //教师指定的不能上课的时间
     //private String[] teacherDesignationNotClassTime;
-    private Map<String,Map<String,Boolean>> teacherDesignationNotClassTime;
+    //private Map<String,Map<String,Boolean>> teacherDesignationNotClassTime;
+    //嵌套Map<String,Boolean>
+    //private Map<String,Map> teacherDesignationNotClassTime;
+    private HashMap<String,HashMap<String,Boolean>> teacherDesignationNotClassTime;
     //教师指定的上课地点
     private String[] teacherDesignationClassLocations;
 
-    public Map<String, Map<String, Boolean>> getTeacherDesignationClassTime() {
+    public HashMap<String, HashMap<String, Boolean>> getTeacherDesignationClassTime() {
         return teacherDesignationClassTime;
     }
 
-    public void setTeacherDesignationClassTime(Map<String, Map<String, Boolean>> teacherDesignationClassTime) {
+    public void setTeacherDesignationClassTime(HashMap<String, HashMap<String, Boolean>> teacherDesignationClassTime) {
         this.teacherDesignationClassTime = teacherDesignationClassTime;
     }
 
-    public Map<String, Map<String, Boolean>> getTeacherDesignationNotClassTime() {
+    public HashMap<String, HashMap<String, Boolean>> getTeacherDesignationNotClassTime() {
         return teacherDesignationNotClassTime;
     }
 
-    public void setTeacherDesignationNotClassTime(Map<String, Map<String, Boolean>> teacherDesignationNotClassTime) {
+    public void setTeacherDesignationNotClassTime(HashMap<String, HashMap<String, Boolean>> teacherDesignationNotClassTime) {
         this.teacherDesignationNotClassTime = teacherDesignationNotClassTime;
     }
 
