@@ -1,6 +1,7 @@
 package scujcc.acss.domain;
 
 import javax.persistence.*;
+import java.util.Map;
 
 /**
  * 教师实体
@@ -19,41 +20,27 @@ public class Teacher {
     //教学班组成
     private String[] classComposition;
     //教师指定的上课时间
-    private String[] teacherDesignationClassTime;
+    //private String[] teacherDesignationClassTime;
+    private Map<String, Map<String,Boolean>> teacherDesignationClassTime;
     //教师指定的不能上课的时间
-    private String[] teacherDesignationNotClassTime;
+    //private String[] teacherDesignationNotClassTime;
+    private Map<String,Map<String,Boolean>> teacherDesignationNotClassTime;
     //教师指定的上课地点
     private String[] teacherDesignationClassLocations;
 
-    public void updateTeacherDesignationClassTime(String[] _teacherDesignationClassTime){
-        if (this.teacherDesignationClassTime == null) {
-            this.setTeacherDesignationClassTime(_teacherDesignationClassTime);
-            return;
-        }
-        String[] temp = this.teacherDesignationClassTime;
-        this.teacherDesignationClassTime = new String[temp.length+_teacherDesignationClassTime.length];
-        int j =0;
-        for (int i =0;i<temp.length;i++) {
-            this.teacherDesignationClassTime[j++] = temp[i];
-        }
-        for (int i =0;i<_teacherDesignationClassTime.length;i++) {
-            this.teacherDesignationClassTime[j++] = temp[i];
-        }
-    }
-
-    public String[] getTeacherDesignationClassTime() {
+    public Map<String, Map<String, Boolean>> getTeacherDesignationClassTime() {
         return teacherDesignationClassTime;
     }
 
-    public void setTeacherDesignationClassTime(String[] teacherDesignationClassTime) {
-            this.teacherDesignationClassTime = teacherDesignationClassTime;
+    public void setTeacherDesignationClassTime(Map<String, Map<String, Boolean>> teacherDesignationClassTime) {
+        this.teacherDesignationClassTime = teacherDesignationClassTime;
     }
 
-    public String[] getTeacherDesignationNotClassTime() {
+    public Map<String, Map<String, Boolean>> getTeacherDesignationNotClassTime() {
         return teacherDesignationNotClassTime;
     }
 
-    public void setTeacherDesignationNotClassTime(String[] teacherDesignationNotClassTime) {
+    public void setTeacherDesignationNotClassTime(Map<String, Map<String, Boolean>> teacherDesignationNotClassTime) {
         this.teacherDesignationNotClassTime = teacherDesignationNotClassTime;
     }
 
@@ -109,13 +96,23 @@ public class Teacher {
         }
         string += "]";
         string += ", teacherDesignationClassTime=[";
-        for (String s:teacherDesignationClassTime) {
-            string += "'"+s+"', ";
+        for (String key1:teacherDesignationClassTime.keySet()){
+            string += "key='"+key1+"', values=[";
+            Map<String,Boolean> temp = teacherDesignationClassTime.get(key1);
+            for (String key2:temp.keySet()) {
+                string += "[ key='"+key2+"', value='"+temp.get(key2)+"'], ";
+            }
+            string += "], ";
         }
         string += "]";
         string += ", teacherDesignationNotClassTime=[";
-        for (String s:teacherDesignationNotClassTime){
-            string += "'"+"', ";
+        for (String key1:teacherDesignationNotClassTime.keySet()){
+            string += "key='"+key1+"', values=[";
+            Map<String,Boolean> temp = teacherDesignationNotClassTime.get(key1);
+            for (String key2:temp.keySet()) {
+                string += "[ key='"+key2+"', value='"+temp.get(key2)+"'], ";
+            }
+            string += "], ";
         }
         string += "]";
         string += ", teacherDesignationClassLocations=[";

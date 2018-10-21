@@ -31,8 +31,9 @@ public class ClassSchedulingUtil {
      * @return java.lang.Object
      **/
     public Object designatedSingleClassTime(Teacher teacher, Course course, String[] times){
-        teacher.updateTeacherDesignationClassTime(times);
-        return teacherRepository.save(teacher);
+//        teacher.updateTeacherDesignationClassTime(times);
+        //return teacherRepository.save(teacher);
+        return null;
     }
 
     /**
@@ -124,8 +125,9 @@ public class ClassSchedulingUtil {
      * @return java.lang.Object
      **/
     public Object designatedTimes(Teacher teacher,String[] times){
-        teacher.setTeacherDesignationClassTime(times);
-        return teacherRepository.save(teacher);
+        //teacher.setTeacherDesignationClassTime(times);
+        //return teacherRepository.save(teacher);
+        return null;
     }
 
     /**
@@ -148,5 +150,16 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedLocationsAndTimes(Teacher teacher,String[] locations,String[] times) {
         return teacherRepository.save(teacher);
+    }
+    
+    /**
+     * @Author CZM
+     * @Description 排课算法，所有的数据均从数据库和对象中获取
+     * @Date 下午 02:34 2018/10/21
+     * @Param []
+     * @return void
+     **/
+    public void scheduling(){
+
     }
 }

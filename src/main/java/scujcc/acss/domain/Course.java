@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Map;
 
 /**
  * 课程实体
@@ -38,7 +39,8 @@ public class Course {
     //选课人数
     private Integer studentNumber;
     //上课时间
-    private String[] classTime;
+    //private String[] classTime;
+    private Map<String, Map<String,Boolean>> classTime;
     //上课地点
     private String[] classLocations;
     //上课班级
@@ -49,13 +51,6 @@ public class Course {
     private Integer courseLength;
     //上课周数
     private Integer weekNumber;
-
-    public void updateCalssTime(String[] _classTime){
-        if (this.classTime == null) {
-            this.setClassTime(_classTime);
-            return;
-        }
-    }
 
     public Integer getCourseId() {
         return courseId;
@@ -121,11 +116,11 @@ public class Course {
         this.studentNumber = studentNumber;
     }
 
-    public String[] getClassTime() {
+    public Map<String, Map<String, Boolean>> getClassTime() {
         return classTime;
     }
 
-    public void setClassTime(String[] classTime) {
+    public void setClassTime(Map<String, Map<String, Boolean>> classTime) {
         this.classTime = classTime;
     }
 
@@ -185,8 +180,13 @@ public class Course {
         string += ", teacherName='"+teacherName+"'";
         string += ", studentNumber="+studentNumber;
         string += ", classTime=[";
-        for (String s:classTime) {
-            string += "'"+s+"', ";
+        for (String key1:classTime.keySet()){
+            string += "key='"+key1+"', values=[";
+            Map<String,Boolean> temp = classTime.get(key1);
+            for (String key2:temp.keySet()) {
+                string += "[ key='"+key2+"', value='"+temp.get(key2)+"'], ";
+            }
+            string += "], ";
         }
         string += "], ";
         string += ", classLocation=[";

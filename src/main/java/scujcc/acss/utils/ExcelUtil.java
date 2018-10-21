@@ -93,6 +93,12 @@ public class ExcelUtil {
         this.totalRows = 0;
     }
 
+    //TODO
+    public String[] splitClassTime(String classTimes){
+        String[] classTimeArray = new String[0];
+        return classTimeArray;
+    }
+
     /**
      * @Author CZM
      * @Description 读取Excel相关数据并放入到序列中

@@ -1,9 +1,12 @@
 package scujcc.acss.domain;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Map;
 
 /**
  * 教室实体
@@ -24,13 +27,14 @@ public class Classroom {
     //教室的座位数
     private Integer classroomSeatsNumber;
     //使用时间
-    private String[] classroomUseTime;
+    //private String[] classroomUseTime;
+    private Map<String, Map<String,Boolean>> classroomUseTime;
 
-    public String[] getClassroomUseTime() {
+    public Map<String, Map<String, Boolean>> getClassroomUseTime() {
         return classroomUseTime;
     }
 
-    public void setClassroomUseTime(String[] classroomUseTime) {
+    public void setClassroomUseTime(Map<String, Map<String, Boolean>> classroomUseTime) {
         this.classroomUseTime = classroomUseTime;
     }
 
@@ -82,8 +86,13 @@ public class Classroom {
         string += ", classroomName='"+classroomName+"'";
         string += ", classroomSeatsNumber="+classroomSeatsNumber;
         string += ", classroomUseTime=[";
-        for (String s:classroomUseTime){
-            string += "'"+s+"', ";
+        for (String key1:classroomUseTime.keySet()){
+            string += "key='"+key1+"', values=[";
+            Map<String,Boolean> temp = classroomUseTime.get(key1);
+            for (String key2:temp.keySet()) {
+                string += "[ key='"+key2+"', value='"+temp.get(key2)+"'], ";
+            }
+            string += "], ";
         }
         string += "]}";
         return string;
