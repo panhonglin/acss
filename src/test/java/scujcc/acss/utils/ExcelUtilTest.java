@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import scujcc.acss.domain.Course;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -50,5 +51,23 @@ public class ExcelUtilTest {
             course.setCourseId(i);
             //course.setClassComposition();
         }
+    }
+
+    @Test
+    public void testSplit(){
+        ExcelUtil excelUti2 = new ExcelUtil("F:\\big_data_technology\\实战Hadoop\\排课系统\\大三方向课开设计划.xlsx");
+        HashMap<String,HashMap<String,Boolean>> testMap = excelUti2.splitClassTime("'周三第9,10节{第5-5周|单周};周三第9,10节{第12-12周|双周};周五第5,6节{第5-15周|单周};周五第7,8节{第5-15周|单周};周一第1,2节{第6-11周};周二第3,4节{第6-11周};周二第9,10节{第5-5周|单周};周二第9,10节{第12-12周|双周}");
+        String string = "";
+        string += ", teacherDesignationNotClassTime=[";
+        for (String key1:testMap.keySet()){
+            string += "key='"+key1+"', values=[";
+            Map<String,Boolean> temp =testMap.get(key1);
+            for (String key2:temp.keySet()) {
+                string += "[ key='"+key2+"', value='"+temp.get(key2)+"'], ";
+            }
+            string += "], ";
+        }
+        string += "]";
+        System.out.println(string);
     }
 }

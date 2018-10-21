@@ -1,12 +1,16 @@
 package scujcc.acss.utils;
 
-import javafx.beans.binding.ObjectExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import scujcc.acss.domain.Classroom;
 import scujcc.acss.domain.Course;
 import scujcc.acss.domain.Teacher;
 import scujcc.acss.repository.ClassroomRepository;
 import scujcc.acss.repository.CourseRepository;
 import scujcc.acss.repository.TeacherRepository;
+import sun.nio.cs.FastCharsetProvider;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 排课相关的工具
@@ -15,6 +19,13 @@ import scujcc.acss.repository.TeacherRepository;
  */
 public class ClassSchedulingUtil {
 
+    //大三的年级
+    private Integer juniorGrade;
+    //星期几
+    private String[] weekString = {"周一","周二","周三","周四","周五"};
+    //第几节课
+    private String[] whichClass = {"第1,2节","第3,4节","第5,6节","第7,8节"};
+
     //教室、教室、课程的jap接口
     @Autowired
     private TeacherRepository teacherRepository;
@@ -22,6 +33,32 @@ public class ClassSchedulingUtil {
     private ClassroomRepository classroomRepository;
     @Autowired
     private CourseRepository courseRepository;
+
+    public ClassSchedulingUtil(Integer juniorGrade){
+        this.juniorGrade = juniorGrade;
+    }
+
+    /**
+     * @Author CZM
+     * @Description 获取需要排课的年级
+     * @Date 下午 05:04 2018/10/21
+     * @Param []
+     * @return java.lang.Integer
+     **/
+    public Integer getJuniorGrade() {
+        return juniorGrade;
+    }
+
+    /**
+     * @Author CZM
+     * @Description 设置需要排课的年级
+     * @Date 下午 05:04 2018/10/21
+     * @Param [juniorGrade]
+     * @return void
+     **/
+    public void setJuniorGrade(Integer juniorGrade) {
+        this.juniorGrade = juniorGrade;
+    }
 
     /**
      * @Author CZM
@@ -140,7 +177,7 @@ public class ClassSchedulingUtil {
     public Object designatedLocations(Teacher teacher,String[] locations){
         return teacherRepository.save(teacher);
     }
-    
+
     /**
      * @Author CZM
      * @Description 指定上课时间和地点，不指定是那个具体的课程
@@ -160,6 +197,49 @@ public class ClassSchedulingUtil {
      * @return void
      **/
     public void scheduling(){
+        //先给C++方向排课，C++课程基本在C208计算机实验室（C++）
+        //
+    }
 
+    /**
+     * @Author CZM
+     * @Description 将大一大二占用的教室时间置为不可用，即false
+     * @Date 下午 05:08 2018/10/21
+     * @Param []
+     * @return void
+     **/
+    public void clearOccupied(){
+        List<Course> courses = courseRepository.findAll();
+        for (int i = 0;i<courses.size();i++) {
+            if (courses.get(i).getGrade() != this.juniorGrade) {
+                for (int j = 0;j<courses.get(i).getClassLocations().length;j++) {
+                    if (this.inJuniorClassroom(courses.get(i).getClassLocations()[j])) {
+                        Classroom updateClassroom = classroomRepository.findByClassroomName(courses.get(i).getClassLocations()[j]);
+                        for (String weekKey:courses.get(i).getClassTime().keySet()) {
+                            for (String classKey:courses.get(i).getClassTime().get(weekKey).keySet()) {
+                                updateClassroom.getClassroomUseTime().get(weekKey).put(classKey,false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @Author CZM
+     * @Description 检测是否为大三的实验室，是返回true，否返回false
+     * @Date 下午 05:42 2018/10/21
+     * @Param [classroomName]
+     * @return java.lang.Boolean
+     **/
+    private Boolean inJuniorClassroom(String classroomName){
+        List<Classroom> classrooms = classroomRepository.findAll();
+        for (int i =0;i<classrooms.size();i++) {
+            if (classroomName.equals(classrooms.get(i).getClassroomName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

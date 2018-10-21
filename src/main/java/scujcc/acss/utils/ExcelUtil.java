@@ -7,7 +7,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import sun.reflect.generics.tree.ClassTypeSignature;
 
+import javax.swing.text.StyledEditorKit;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,10 +95,42 @@ public class ExcelUtil {
         this.totalRows = 0;
     }
 
-    //TODO
-    public String[] splitClassTime(String classTimes){
-        String[] classTimeArray = new String[0];
-        return classTimeArray;
+    /**
+     * @Author CZM
+     * @Description 将从表格中得到的一串的上课时间分割成时间map
+     * @Date 下午 06:55 2018/10/21
+     * @Param [classTimes]
+     * @return java.util.HashMap<java.lang.String,java.util.HashMap<java.lang.String,java.lang.Boolean>>
+     **/
+    public HashMap<String,HashMap<String,Boolean>> splitClassTime(String classTimes){
+        String[] classTimeArray = classTimes.replaceAll("((\\')|\\{[\\u4e00-\\u9fa5]*\\d*-\\d*[\\u4e00-\\u9fa5]*\\|*[\\u4e00-\\u9fa5]*\\})","").split(";");
+        HashMap<String,HashMap<String,Boolean>> classTimeMap = new HashMap<String,HashMap<String, Boolean>>();
+        for (String time:classTimeArray) {
+            if (classTimeMap.get(time.substring(0,"周一".length())) == null) {
+                classTimeMap.put(time.substring(0,"周一".length()),new HashMap<String,Boolean>());
+                classTimeMap.get(time.substring(0,"周一".length())).put(time.substring("周一".length(),time.length()),false);
+            } else {
+                if (classTimeMap.get(time.substring(0,"周一".length())).get(time.substring("周一".length(),time.length())) == null) {
+                    classTimeMap.get(time.substring(0,"周一".length())).put(time.substring("周一".length(),time.length()),false);
+                }
+            }
+        }
+        return classTimeMap;
+    }
+
+    /**
+     * @Author CZM
+     * @Description 将教室位置分割成String数组
+     * @Date 下午 05:50 2018/10/21
+     * @Param [classLocations]
+     * @return java.lang.String[]
+     **/
+    public String[] splitClassLocations(String classLocations){
+        return classLocations.replaceAll("\'","").split(";");
+    }
+
+    public String[] splitClassComposition(String classComposition){
+        return classComposition.replaceAll("\'","").split(",");
     }
 
     /**
@@ -165,19 +199,19 @@ public class ExcelUtil {
                     switch (cell.getCellType()) {
                         //数字
                         case HSSFCell.CELL_TYPE_NUMERIC:
-                            cellValue = cell.getNumericCellValue() + "";
+                            cellValue = (cell.getNumericCellValue() + "").replaceAll("\'","");
                             break;
                         //字符串
                         case HSSFCell.CELL_TYPE_STRING:
-                            cellValue = cell.getStringCellValue();
+                            cellValue = cell.getStringCellValue().replaceAll("\'","");
                             break;
                         //布尔类型
                         case HSSFCell.CELL_TYPE_BOOLEAN:
-                            cellValue = cell.getBooleanCellValue() + "";
+                            cellValue = (cell.getBooleanCellValue() + "").replaceAll("\'","");
                             break;
                         //公式
                         case HSSFCell.CELL_TYPE_FORMULA:
-                            cellValue = cell.getCellFormula() + "";
+                            cellValue = (cell.getCellFormula() + "").replaceAll("\'","");
                             break;
                         //空值
                         case HSSFCell.CELL_TYPE_BLANK:
