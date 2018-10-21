@@ -1,5 +1,7 @@
 package scujcc.acss.domain;
 
+import sun.util.resources.ca.CalendarData_ca;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,10 @@ import javax.persistence.Id;
  */
 @Entity
 public class Course {
+    /**
+     * 四个、三个学分上四节课，分别上16周和12周，两个、一个学分上两节课，分别是16周，8周
+     **/
+
     //TODO
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +49,13 @@ public class Course {
     private Integer courseLength;
     //上课周数
     private Integer weekNumber;
+
+    public void updateCalssTime(String[] _classTime){
+        if (this.classTime == null) {
+            this.setClassTime(_classTime);
+            return;
+        }
+    }
 
     public Integer getCourseId() {
         return courseId;

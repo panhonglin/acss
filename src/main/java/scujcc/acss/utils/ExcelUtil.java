@@ -47,7 +47,7 @@ public class ExcelUtil {
 
     /**
      * @Author CZM
-     * @Description 初始化Excel工具，并读取相关的数据
+     * @Description 初始化Excel工具，并读取相关的数据，需要制定文件的路径
      * @Date 下午 02:47 2018/10/20
      * @Param [fileAddress]
      * @return 
