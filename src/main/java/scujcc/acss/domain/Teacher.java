@@ -24,16 +24,8 @@ public class Teacher {
     //教学班组成
     private String[] classComposition;
     //教师指定的上课时间
-    //private String[] teacherDesignationClassTime;
-    //private Map<String, Map<String,Boolean>> teacherDesignationClassTime;
-    //嵌套Map<String,Boolean>
-    //private Map<String,Map> teacherDesignationClassTime;
     private HashMap<String,HashMap<String,Boolean>> teacherDesignationClassTime;
     //教师指定的不能上课的时间
-    //private String[] teacherDesignationNotClassTime;
-    //private Map<String,Map<String,Boolean>> teacherDesignationNotClassTime;
-    //嵌套Map<String,Boolean>
-    //private Map<String,Map> teacherDesignationNotClassTime;
     private HashMap<String,HashMap<String,Boolean>> teacherDesignationNotClassTime;
     //教师指定的上课地点
     private String[] teacherDesignationClassLocations;

@@ -9,6 +9,7 @@ import scujcc.acss.repository.CourseRepository;
 import scujcc.acss.repository.TeacherRepository;
 import sun.nio.cs.FastCharsetProvider;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -197,8 +198,37 @@ public class ClassSchedulingUtil {
      * @return void
      **/
     public void scheduling(){
+        //初始化教室的时间表
+        this.initClassroomTime();
+        //把教室被占用的时间标记出来
+        this.clearOccupied();
         //先给C++方向排课，C++课程基本在C208计算机实验室（C++）
-        //
+
+        //给其他的方向排课
+    }
+
+    /**
+     * @Author CZM
+     * @Description 将教室的时间进行初始化，其中，周五的下午不排课，晚上不排课
+     * @Date 下午 05:21 2018/10/22
+     * @Param []
+     * @return void
+     **/
+    public void initClassroomTime(){
+        List<Classroom> classrooms = classroomRepository.findAll();
+        for (int i =0;i<classrooms.size();i++) {
+            HashMap<String,HashMap<String,Boolean>> classroomTime = new HashMap<String, HashMap<String, Boolean>>();
+            for (int j = 0;j<weekString.length;i++) {
+                HashMap<String,Boolean> line = new HashMap<String, Boolean>();
+                for (int k = 0;k<whichClass.length;k++) {
+                    //周五下午不上课
+                    line.put(whichClass[k],whichClass[k].equals("周五")?false:true);
+                }
+                classroomTime.put(weekString[j],line);
+            }
+            classrooms.get(i).setClassroomUseTime(classroomTime);
+            classroomRepository.save(classrooms.get(i));
+        }
     }
 
     /**
@@ -241,5 +271,19 @@ public class ClassSchedulingUtil {
             }
         }
         return false;
+    }
+
+    //TODO
+    /*
+     * @Author CZM
+     * @Description 根据指定的教室和专业方向进行排序
+     * @Date 下午 05:48 2018/10/22
+     * @Param [disciplineName, classroomName]
+     * @return void
+     **/
+    public void schedulingWithDisciplineAndClassroom(String disciplineName,String classroomName){
+        if (!disciplineName.equals("") && !classroomName.equals("")) {
+            
+        }
     }
 }
