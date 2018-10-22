@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * 排课相关的工具
- * @author CZM
+ * @author CZMs
  * @create 2018-10-20 上午 11:38
  */
 public class ClassSchedulingUtil {
@@ -69,6 +69,7 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedSingleClassTime(Teacher teacher, Course course, String[] times){
 //        teacher.updateTeacherDesignationClassTime(times);
+        //course.updateCourseDesignationClassTime(times);
         //return teacherRepository.save(teacher);
         return null;
     }
@@ -82,6 +83,8 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedMultipleClassTime(Teacher teacher, Course[] courses,String[] times){
         //TODO
+        //teacher.updateTeacherDesignationClassTime(times);
+        //course.updateCourseMultiDesignationClassTime(courses);
         return teacherRepository.save(teacher);
     }
 
@@ -94,6 +97,8 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedSingleNotClassTime(Teacher teacher,Course course,String[] times){
         //TODO
+        //teacher.updateTeacherDesignationClassTime(times);
+        //course.updateCourseDesignationNotClassTime(times);
         return teacherRepository.save(teacher);
     }
 
@@ -105,6 +110,8 @@ public class ClassSchedulingUtil {
      * @return java.lang.Object
      **/
     public Object designatedMultipleNotClassTime(Teacher teacher,Course[] course,String[] times){
+        //teacher.updateTeacherDesignationClassTime(times);
+        //course.updateCourseMultiDesignationNotClassTime(courses);
         return teacherRepository.save(teacher);
     }
 
@@ -117,6 +124,8 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedSingleClassLocation(Teacher teacher,Course course,String[] locations){
         //TODO
+        //teacher.updateTeacherDesignatedClassLocation(locations);
+        //course.updateCourseDesignatedClassLocation(locations);
         return teacherRepository.save(teacher);
     }
 
@@ -128,6 +137,9 @@ public class ClassSchedulingUtil {
      * @return java.lang.Object
      **/
     public Object designatedMultipleClassLOcations(Teacher teacher,Course[] course,String[] locations){
+        //T0D0
+        //teacher.updateTeacherDesignatedClassLocation(locations);
+        //course.updateCourseMultiDesignationClassLocations(locations);
         return teacherRepository.save(teacher);
     }
 
@@ -140,6 +152,8 @@ public class ClassSchedulingUtil {
      **/
     public Object designatedSingleClassLocationAndTime(Teacher teacher,Course course,String[] locations,String[] times){
         //TODO
+        //teacher.updateTeacherMultiDesignationClassLocationsAndTime(times,locations);
+        //course.updatedesignatedClassLocationAndTime(times,locations);
         return teacherRepository.save(teacher);
     }
 
@@ -151,6 +165,8 @@ public class ClassSchedulingUtil {
      * @return java.lang.Object
      **/
     public Object designatedMultipleClassLOcationsAndTimes(Teacher teacher,Course[] courses,String[] locations,String[] times){
+        //teacher.updateTeacherMultiDesignationClassLocationsAndTime(times,locations);
+        //course.updateTeacherMultiDesignationClassLocationsAndTime(times,locations);
         return teacherRepository.save(teacher);
     }
 
