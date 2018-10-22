@@ -43,6 +43,7 @@ public class Course {
     //private String[] classTime;
     private HashMap<String, HashMap<String,Boolean>> classTime;
     //上课地点
+    //如果有老师指定了教室，一定要同时更新到数据库
     private String[] classLocations;
     //上课班级
     private String[] classComposition;
