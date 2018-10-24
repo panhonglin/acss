@@ -6,7 +6,7 @@ import scujcc.acss.domain.Course;
 import scujcc.acss.repository.CourseRepository;
 
 import javax.transaction.Transactional;
-//潘虹霖的提交测试
+//潘虹霖de提交测试
 /**
  * 课程的事务管理
  * @author CZM
