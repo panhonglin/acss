@@ -54,6 +54,7 @@ public class ExceptionHandle {
             return ResultUtil.error(excelException.getCode(),excelException.getMsg());
         } else {
             logger.error("【系统异常】{}",e.toString());
+            e.printStackTrace();
             return ResultUtil.error(ResultEnums.UNKNOW_ERROR.getCode(),ResultEnums.UNKNOW_ERROR.getMsg());
         }
     }

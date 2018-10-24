@@ -1,9 +1,6 @@
 package scujcc.acss.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +19,25 @@ public class Teacher {
     //教师姓名
     private String teacherName;
     //教学班组成
+    @Column(length = 16777216)
     private String[] classComposition;
     //教师指定的上课时间
+    @Column(length = 16777216)
     private HashMap<String,HashMap<String,Boolean>> teacherDesignationClassTime;
     //教师指定的不能上课的时间
+    @Column(length = 16777216)
     private HashMap<String,HashMap<String,Boolean>> teacherDesignationNotClassTime;
     //教师指定的上课地点
+    @Column(length = 16777216)
     private String[] teacherDesignationClassLocations;
+
+    public Teacher(){
+        this.teacherName="";
+        this.classComposition=new String[0];
+        this.teacherDesignationClassTime=new HashMap<String, HashMap<String, Boolean>>();
+        this.teacherDesignationNotClassTime=new HashMap<String, HashMap<String, Boolean>>();
+        this.teacherDesignationClassLocations=new String[0];
+    }
 
     public HashMap<String, HashMap<String, Boolean>> getTeacherDesignationClassTime() {
         return teacherDesignationClassTime;
