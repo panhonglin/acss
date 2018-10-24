@@ -2,10 +2,7 @@ package scujcc.acss.domain;
 
 import sun.util.resources.ca.CalendarData_ca;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,11 +38,14 @@ public class Course {
     private Integer studentNumber;
     //上课时间
     //private String[] classTime;
+    @Column(length = 16777216)
     private HashMap<String, HashMap<String,Boolean>> classTime;
     //上课地点
     //如果有老师指定了教室，一定要同时更新到数据库
+    @Column(length = 16777216)
     private String[] classLocations;
     //上课班级
+    @Column(length = 16777216)
     private String[] classComposition;
     //总学时
     private Double totalPeriod;
@@ -53,6 +53,22 @@ public class Course {
     private Integer courseLength;
     //上课周数
     private Integer weekNumber;
+
+    public Course(){
+        this.grade = 0;
+        this.courseCode="";
+        this.courseName="";
+        this.courseType="";
+        this.credit=0.0;
+        this.teacherName="";
+        this.studentNumber=0;
+        this.classTime=new HashMap<String, HashMap<String, Boolean>>();
+        this.classLocations=new String[0];
+        this.classComposition=new String[0];
+        this.totalPeriod=0.0;
+        this.courseLength=0;
+        this.weekNumber=0;
+    }
 
     public Integer getCourseId() {
         return courseId;

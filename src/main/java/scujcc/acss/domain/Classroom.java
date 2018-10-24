@@ -33,6 +33,12 @@ public class Classroom {
     //private Map<String,Map> classroomUseTime;
     private HashMap<String,HashMap<String,Boolean>> classroomUseTime;
 
+    public Classroom(){
+        this.classroomUseTime = new HashMap<String,HashMap<String, Boolean>>();
+        this.classroomSeatsNumber = 0;
+        this.classroomName="";
+    }
+
     /*
     Map<String, Map<String,Boolean>> map = new HashMap<String,Map<String,Boolean>>();
     String[] week = {"周一","周二","周三","周四","周五"};

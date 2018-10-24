@@ -241,7 +241,7 @@ public class ClassSchedulingUtil {
                 HashMap<String,Boolean> line = new HashMap<String, Boolean>();
                 for (int k = 0;k<whichClass.length;k++) {
                     //周五下午不上课
-                    line.put(whichClass[k],whichClass[k].equals("周五")?false:true);
+                    line.put(whichClass[k],whichClass[k].equals("周五") && k >1?false:true);
                 }
                 classroomTime.put(weekString[j],line);
             }
@@ -302,6 +302,10 @@ public class ClassSchedulingUtil {
      **/
     //public void schedulingWithDisciplineAndClassroom(String disciplineName,String classroomName){
     public void schedulingWithDiscipline(String classroomName){
+
+    }
+    /*
+    public void schedulingWithDiscipline(String classroomName){
         //获取相关的数据
         List<Course> courses = null;
         HashMap<String,Teacher> teachers = null;
@@ -314,9 +318,9 @@ public class ClassSchedulingUtil {
         } else {
             courses = courseRepository.findAllByGrade(this.juniorGrade);
         }
-        */
 
         teachers = new HashMap<String,Teacher>();
+        //根据课程的老师来定对象
         for (int i =0;i<courses.size();i++) {
             teachers.put(courses.get(i).getTeacherName(),teacherRepository.findByTeacherName(courses.get(i).getTeacherName()));
         }
@@ -355,18 +359,15 @@ public class ClassSchedulingUtil {
             }
         }
     }
-
-    /*
-    private boolean desciplineClasslocations(String[] classLocations){
-        for (int i =0;i<classLocations.length;i++) {
-            if (!"".equals(classLocations[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
     */
 
+    /**
+     * @Author CZM
+     * @Description 获取第一个教室的位置
+     * @Date 下午 11:39 2018/10/23
+     * @Param [classLocations]
+     * @return java.lang.String
+     **/
     private String getFirstDesciplineClasslocation(String[] classLocations){
         for (int i=0;i<classLocations.length;i++) {
             if (!"".equals(classLocations[i])) {
