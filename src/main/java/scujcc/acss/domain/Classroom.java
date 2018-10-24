@@ -14,7 +14,7 @@ import java.util.Map;
  * @create 2018-10-20 上午 12:36
  */
 @Entity
-public class Classroom {
+public class    Classroom {
     //TODO
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
