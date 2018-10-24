@@ -42,6 +42,11 @@ public class ClassroomService {
     public void deleteSingleById(Integer id){
         classroomRepository.delete(classroomRepository.findByClassroomId(id));
     }
+
+    /**
+     * 通过教室号删除单个对象
+     * @param classroomNumber
+     */
     @Transactional
     public void deleteSingleByClassroomNumber(Integer classroomNumber){
         classroomRepository.delete(classroomRepository.findByClassroomNumber(classroomNumber));
@@ -63,12 +68,22 @@ public class ClassroomService {
             this.deleteSingleById(id[i]);
         }
     }
+
+    /**
+     * 通过教室号删除多个教室
+     * @param classroomNumber
+     */
     @Transactional
     public void deleteMultipleByClassroomNumber(Integer[] classroomNumber){
         for (int i =0;i<classroomNumber.length;i++) {
             this.deleteSingleByClassroomNumber(classroomNumber[i]);
         }
     }
+
+    /**
+     * 通过教室名删除多个教室信息
+     * @param classroomName
+     */
     @Transactional
     public void deleteMultipleByClassroomName(String[] classroomName){
         for (int i =0;i<classroomName.length;i++) {

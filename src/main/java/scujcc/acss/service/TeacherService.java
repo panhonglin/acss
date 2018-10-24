@@ -17,7 +17,11 @@ public class TeacherService {
     private TeacherRepository teacherRepository;
     //TODO
     @Transactional
+    /**
+     * 插入一个老师信息
+     */
     public void insert(Teacher teacher){
+
         teacherRepository.save(teacher);
     }
 }
