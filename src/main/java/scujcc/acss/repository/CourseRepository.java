@@ -21,4 +21,6 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
     public List<Course> findAllByTotalPeriod(Double totalPeriod);
     public List<Course> findAllByCourseLength(Integer courseLength);
     public List<Course> findAllByWeekNumber(Integer weekNumber);
+    public List<Course> findAllByClassComposition(String composition);
+    public List<Course> findAllByClassCompositionAndGrade(String compostion,Integer grade);
 }

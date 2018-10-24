@@ -36,5 +36,5 @@ public interface TeacherRepository extends JpaRepository<Teacher,Integer> {
      * @Param [classComposition]
      * @return java.util.List<scujcc.acss.domain.Teacher>
      **/
-    //public List<Teacher> findByClassComposition(String lassComposition);
+    public List<Teacher> findByClassComposition(String lassComposition);
 }

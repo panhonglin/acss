@@ -7,9 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import sun.reflect.generics.tree.ClassTypeSignature;
 
-import javax.swing.text.StyledEditorKit;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +57,7 @@ public class ExcelUtil {
         this.fileAddress = fileAddress;
     }
 
+
     /**
      * @Author CZM
      * @Description 将list转换为map，方便通过键值来获取数据，默认第一行为各项属相的键值
@@ -103,7 +102,7 @@ public class ExcelUtil {
      * @Param [classTimes]
      * @return java.util.HashMap<java.lang.String,java.util.HashMap<java.lang.String,java.lang.Boolean>>
      **/
-    public HashMap<String,HashMap<String,Boolean>> splitClassTime(String classTimes){
+    public static HashMap<String,HashMap<String,Boolean>> splitClassTime(String classTimes){
         String[] classTimeArray = classTimes.replaceAll("((\\')|\\{[\\u4e00-\\u9fa5]*\\d*-\\d*[\\u4e00-\\u9fa5]*\\|*[\\u4e00-\\u9fa5]*\\})","").split(";");
         HashMap<String,HashMap<String,Boolean>> classTimeMap = new HashMap<String,HashMap<String, Boolean>>();
         for (String time:classTimeArray) {
@@ -126,11 +125,11 @@ public class ExcelUtil {
      * @Param [classLocations]
      * @return java.lang.String[]
      **/
-    public String[] splitClassLocations(String classLocations){
+    public static String[] splitClassLocations(String classLocations){
         return classLocations.replaceAll("\'","").split(";");
     }
 
-    public String[] splitClassComposition(String classComposition){
+    public static String[] splitClassComposition(String classComposition){
         return classComposition.replaceAll("\'","").split(",");
     }
 
@@ -141,7 +140,7 @@ public class ExcelUtil {
      * @Param []
      * @return java.util.List<java.util.List<java.lang.String>>
      **/
-    public List<List<String>> read() {
+    public ExcelUtil read() {
         List<List<String>> data = new ArrayList<List<String>>();
         InputStream inputStream = null;
         try {
@@ -159,7 +158,7 @@ public class ExcelUtil {
             e.printStackTrace();
         }
         this.excelList = data;
-        return data;
+        return this;
     }
 
     private List<List<String>> read(InputStream inputStream, String type) {
@@ -178,7 +177,7 @@ public class ExcelUtil {
         return data;
     }
 
-    private List<List<String>> read(Workbook workbook) {
+    private List<List<String>> read(Workbook workbook) throws UnsupportedEncodingException {
         List<List<String>> data = new ArrayList<List<String>>();
         //Map<Integer,Map<String,String>> data = new HashMap<Integer,Map<String,String>>();
         Sheet sheet = workbook.getSheetAt(0);
@@ -199,20 +198,19 @@ public class ExcelUtil {
                 if (null != cell) {
                     switch (cell.getCellType()) {
                         //数字
-                        case HSSFCell.CELL_TYPE_NUMERIC:
-                            cellValue = (cell.getNumericCellValue() + "").replaceAll("\'","");
+                        case HSSFCell.CELL_TYPE_NUMERIC: cellValue = new String(((cell.getNumericCellValue() + "").replaceAll("\'","")).getBytes(),"utf-8");
                             break;
                         //字符串
                         case HSSFCell.CELL_TYPE_STRING:
-                            cellValue = cell.getStringCellValue().replaceAll("\'","");
+                            cellValue = new String((cell.getStringCellValue().replaceAll("\'","")).getBytes(),"utf-8");
                             break;
                         //布尔类型
                         case HSSFCell.CELL_TYPE_BOOLEAN:
-                            cellValue = (cell.getBooleanCellValue() + "").replaceAll("\'","");
+                            cellValue = new String(((cell.getBooleanCellValue() + "").replaceAll("\'","")).getBytes(),"utf-8");
                             break;
                         //公式
                         case HSSFCell.CELL_TYPE_FORMULA:
-                            cellValue = (cell.getCellFormula() + "").replaceAll("\'","");
+                            cellValue = new String(((cell.getCellFormula() + "").replaceAll("\'","")).getBytes(),"utf-8");
                             break;
                         //空值
                         case HSSFCell.CELL_TYPE_BLANK:
@@ -291,3 +289,22 @@ public class ExcelUtil {
         this.excelMap = excelMap;
     }
 }
+/*
+ * @Author CZM
+ * @Description //TODO
+ * @Date 上午 09:41 2018/10/24
+ * @Param
+ * @return
+ 161	C208计算机实验室（C++)	1	40
+173	.net实验室	2	20
+182	电子商务实验室（嵌入式）	3	64
+183	计算机科技实验室	4	80
+184	软件工程实验室	5	90
+185	网络工程实验室（J2EE）	6	64
+186	网络营销实验室（IT商务）	7	48
+187	信息安全实验室	8	60
+188	信息管理实验室	9	48
+189	云计算实验室	10	48
+328	C101	11	30
+
+ **/

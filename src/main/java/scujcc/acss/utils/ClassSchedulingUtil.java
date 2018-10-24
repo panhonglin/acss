@@ -9,10 +9,8 @@ import scujcc.acss.repository.CourseRepository;
 import scujcc.acss.repository.TeacherRepository;
 import sun.nio.cs.FastCharsetProvider;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-//黄涛第一次提交2
+import java.util.*;
+
 /**
  * 排课相关的工具
  * @author CZMs
@@ -219,6 +217,11 @@ public class ClassSchedulingUtil {
         //把教室被占用的时间标记出来
         this.clearOccupied();
         //先给C++方向排课，C++课程基本在C208计算机实验室（C++）
+        List<Course> courses = courseRepository.findAllByClassCompositionAndGrade("C++",this.juniorGrade);
+        for (int i =0;i<courses.size();i++) {
+            courses.get(i).setClassLocations(new String[]{"C208计算机实验室（C++)"});
+            courseRepository.save(courses.get(i));
+        }
 
         //给其他的方向排课
     }
@@ -238,7 +241,7 @@ public class ClassSchedulingUtil {
                 HashMap<String,Boolean> line = new HashMap<String, Boolean>();
                 for (int k = 0;k<whichClass.length;k++) {
                     //周五下午不上课
-                    line.put(whichClass[k],whichClass[k].equals("周五")?false:true);
+                    line.put(whichClass[k],whichClass[k].equals("周五") && k >1?false:true);
                 }
                 classroomTime.put(weekString[j],line);
             }
@@ -297,9 +300,81 @@ public class ClassSchedulingUtil {
      * @Param [disciplineName, classroomName]
      * @return void
      **/
-    public void schedulingWithDisciplineAndClassroom(String disciplineName,String classroomName){
-        if (!disciplineName.equals("") && !classroomName.equals("")) {
-            
+    //public void schedulingWithDisciplineAndClassroom(String disciplineName,String classroomName){
+    public void schedulingWithDiscipline(String classroomName){
+
+    }
+    /*
+    public void schedulingWithDiscipline(String classroomName){
+        //获取相关的数据
+        List<Course> courses = null;
+        HashMap<String,Teacher> teachers = null;
+        List<Classroom> classrooms = null;
+
+        //若有指定的专业和教室，则按指定的来获取
+        /*
+        if ("".equals(disciplineName)) {
+            courses = courseRepository.findAllByClassCompositionAndGrade(disciplineName,this.juniorGrade);
+        } else {
+            courses = courseRepository.findAllByGrade(this.juniorGrade);
+        }
+
+        teachers = new HashMap<String,Teacher>();
+        //根据课程的老师来定对象
+        for (int i =0;i<courses.size();i++) {
+            teachers.put(courses.get(i).getTeacherName(),teacherRepository.findByTeacherName(courses.get(i).getTeacherName()));
+        }
+
+        if ("".equals(classroomName)) {
+            classrooms = new ArrayList<Classroom>();
+            classrooms.add(classroomRepository.findByClassroomName(classroomName));
+        } else {
+            classrooms  = classroomRepository.findAll();
+        }
+
+        //遍历课程，并进行安排
+        for (int i = 0;i<courses.size();i++){
+            Teacher teacher = teachers.get(courses.get(i).getTeacherName());
+            //先判断有无指定的教室或时间或二者都有
+            //先判断有无指定教室
+            if (!"".equals(this.getFirstDesciplineClasslocation(courses.get(i).getClassLocations()))) { //如果有指定教室，以第一个教室为准
+                if (null != courses.get(i).getClassTime()) { //既有指定教室，又有指定时间
+                    //if (null != teacher.getTeacherDesignationNotClassTime())
+                } else { //只有指定地点，无指定时间
+                    if (null != teacher.getTeacherDesignationNotClassTime()) { //指定了地点并指定了不能上课的时间
+
+                    } else {
+
+                    }
+                }
+
+            } else if (null != courses.get(i).getClassTime()){ //如果有指定的时间但无指定地点
+
+            } else { //既无指定时间又无指定地点
+                if (null != teacher.getTeacherDesignationNotClassTime()) { //指定了不能上课的时间
+
+                } else {
+
+                }
+            }
         }
     }
+    */
+
+    /**
+     * @Author CZM
+     * @Description 获取第一个教室的位置
+     * @Date 下午 11:39 2018/10/23
+     * @Param [classLocations]
+     * @return java.lang.String
+     **/
+    private String getFirstDesciplineClasslocation(String[] classLocations){
+        for (int i=0;i<classLocations.length;i++) {
+            if (!"".equals(classLocations[i])) {
+                return classLocations[i];
+            }
+        }
+        return "";
+    }
+
 }

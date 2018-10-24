@@ -1,10 +1,7 @@
 package scujcc.acss.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +28,14 @@ public class Classroom {
     //private Map<String, Map<String,Boolean>> classroomUseTime;
     //嵌套的map应当是Map<String,Boolean>
     //private Map<String,Map> classroomUseTime;
+    @Column(length = 16777216)
     private HashMap<String,HashMap<String,Boolean>> classroomUseTime;
+
+    public Classroom(){
+        this.classroomUseTime = new HashMap<String,HashMap<String, Boolean>>();
+        this.classroomSeatsNumber = 0;
+        this.classroomName="";
+    }
 
     /*
     Map<String, Map<String,Boolean>> map = new HashMap<String,Map<String,Boolean>>();
